@@ -9,6 +9,9 @@
 
 int main(){
 	unsigned i, n;
+	int a;
+	alumno *alumnos = leer_alumnos(&n);
+	char id[7];
 //	alumno a;
 //	strcpy(a.id_alumno, "123456");
 //	strcpy(a.nombre_alum, "Alumno");
@@ -23,16 +26,20 @@ int main(){
 //	guardar_alumno(&a, f);
 //	fclose(f);
 	
-	alumno *alumnos = leer_alumnos(&n);
-	
-	for(i = 0; i < n; i++)
-		mostrar_alumno(&alumnos[i]);
-		
-	free(alumnos);
-	
+//	for(i = 0; i < n; i++)
+//		mostrar_alumno(&alumnos[i]);	
 	return 0;
 }
 
+int encontrar_alumno(alumno *a, unsigned n, char *id) {
+	int i = 0, encontrado = -1;
+	while(i < n && encontrado == -1){
+		if(strcmp(id,a[i].id_alumno) == 0)
+			encontrado = i;
+		i++;
+	}
+	return encontrado;
+}
 // Cabecera: void mostrar_alumno (alumno)
 // Precondición: alumno inicializado
 // Postcondición: Muestra el contenido de alumno
@@ -98,12 +105,3 @@ alumno *leer_alumnos(unsigned *nAlumnos) {
 	*nAlumnos = n;
 	return alumnos;
 }
-
-
-
-
-
-
-
-
-
