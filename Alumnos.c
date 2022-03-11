@@ -27,10 +27,15 @@ int main(){
 //	fclose(f);
 	
 //	for(i = 0; i < n; i++)
-//		mostrar_alumno(&alumnos[i]);	
+//		mostrar_alumno(&alumnos[i]);
+	free(alumnos);	
 	return 0;
 }
-
+void menu_admin_alumno (alumno *a, unsigned n) {
+	puts("Introduzca la operacion deseada");
+	printf("------------------------------");
+	printf("")
+}
 int encontrar_alumno(alumno *a, unsigned n, char *id) {
 	int i = 0, encontrado = -1;
 	while(i < n && encontrado == -1){
