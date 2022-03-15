@@ -32,10 +32,39 @@ int main(){
 	return 0;
 }
 void menu_admin_alumno (alumno *a, unsigned n) {
+	int op;
+	char id[7];
+	do{
 	puts("Introduzca la operacion deseada");
-	printf("------------------------------");
-	printf("")
+	printf("------------------------------\n");
+	printf("1) Listar alumnos\n2) Modificar alumnos\n3) Dar de alta alumno\n4) Dar de baja alumno\n0) Salir.\n");
+	scanf("%i", &op);
+	switch(op) {
+		case 1:
+			mostrar_alumnos(a,n);
+			break;
+		case 2:
+			fflush(stdin);
+			puts("Introduzca el id del alumno");
+			scanf("%s", &id);
+			if(encontrar_alumno(a,n,id) == -1)
+				puts("Alumno no encontrado");
+			else {
+				
+			}
+			
+	}
+	}while(op != 0);
 }
+void modificar_alumno(alumno a){
+	int op;
+	puts("Introduzca que desea cambiar");
+	printf("-------------------------\n");
+	switch(op){
+		case 1:
+	}
+}
+
 int encontrar_alumno(alumno *a, unsigned n, char *id) {
 	int i = 0, encontrado = -1;
 	while(i < n && encontrado == -1){
@@ -45,13 +74,21 @@ int encontrar_alumno(alumno *a, unsigned n, char *id) {
 	}
 	return encontrado;
 }
+//Cabecera: mostrar_alumnos (const alumno *a, unsigned n)
+//Precondiciï¿½n: Alumno inicializado
+//Postcondiciï¿½n: Muestra por pantalla los n alumnos
+void mostrar_alumnos (const alumno *a, unsigned n){
+	int i;
+	for(i = 0; i < n; i++)
+		mostrar_alumno (&a[i]);
+}
 // Cabecera: void mostrar_alumno (alumno)
-// Precondición: alumno inicializado
-// Postcondición: Muestra el contenido de alumno
+// Precondiciï¿½n: alumno inicializado
+// Postcondiciï¿½n: Muestra el contenido de alumno
 void mostrar_alumno (const alumno *a) {
 	printf("ID: %s\n", a->id_alumno);
 	printf("Nombre: %s\n", a->nombre_alum);
-	printf("Dirección: %s\n", a->direc_alum);
+	printf("Direcciï¿½n: %s\n", a->direc_alum);
 	printf("Localidad: %s\n", a->local_alum);
 	printf("Curso: %s\n", a->curso);
 	printf("Grupo: %s\n", a->grupo);
@@ -59,8 +96,8 @@ void mostrar_alumno (const alumno *a) {
 }
 
 // Cabecera void guardar_alumno (alumno, FILE *)
-// Precondición: Alumno inicializado, fichero abierto para escribir
-// Postcondición: Escribe en el alumno.txt los datos del alumno
+// Precondiciï¿½n: Alumno inicializado, fichero abierto para escribir
+// Postcondiciï¿½n: Escribe en el alumno.txt los datos del alumno
 void guardar_alumno (const alumno *a, FILE *f) {
 //	f = fopen("Alumnos.txt", "w");
 	fprintf(f,"%s-", a->id_alumno);
