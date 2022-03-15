@@ -32,7 +32,7 @@ int main(){
 	return 0;
 }
 void menu_admin_alumno (alumno *a, unsigned n) {
-	int op;
+	int op, encontrado;
 	char id[7];
 	do{
 	puts("Introduzca la operacion deseada");
@@ -47,22 +47,99 @@ void menu_admin_alumno (alumno *a, unsigned n) {
 			fflush(stdin);
 			puts("Introduzca el id del alumno");
 			scanf("%s", &id);
-			if(encontrar_alumno(a,n,id) == -1)
+			encontrado = encontrar_alumno(a, n, id);
+			if(encontrado == -1)
 				puts("Alumno no encontrado");
 			else {
-				
+				modificar_alumno(a[encontrado]);
 			}
+			break;
 			
 	}
-	}while(op != 0);
+	}while(salir_menu() == 0);
+}
+int salir_menu() {
+	int valido = 0, salir = 0;
+	char opcion;
+	do{
+		fflush(stdin);
+		puts("¿Desea hacer otra operacion? (s/n)");
+		scanf("%c",&opcion);
+		switch(opcion){
+			case 'S':
+				valido = 1;
+				salir = 0;
+				break;
+			case 's':
+				valido = 1;
+				salir = 0;
+				break;
+			case 'n':
+				valido = 1;
+				salir = 1;
+				break;
+			case 'N':
+				valido = 1;
+				salir = 1;
+				break;
+			default:
+				puts("Opcion no valida");
+				valido = 0;
+				break;
+		}
+	}while(valido == 0);
+	return salir;
 }
 void modificar_alumno(alumno a){
 	int op;
+	char id[7], nombre[21], direccion[31], localidad[31], curso[31], grupo[11];
 	puts("Introduzca que desea cambiar");
 	printf("-------------------------\n");
-	switch(op){
-		case 1:
-	}
+	printf("1)Id\n2)Nombre\n3)Dirección\n4)Localidad\n5)Curso\n6)Grupo\n");
+	scanf("%i",&op);
+	do{
+		switch(op){
+			case 1:
+				fflush(stdin);
+				puts("Introduzca la nueva id");
+				fgets(id, 7, stdin);
+				strcpy(a.id_alumno,id);
+				break;
+			case 2:
+				fflush(stdin);
+				puts("Introduzca el nuevo nombre");
+				fgets(nombre,21, stdin);
+				strcpy(a.nombre_alum, nombre);
+				break;
+			case 3:
+				fflush(stdin);
+				puts("Introduce la nueva direccion");
+				fgets(direccion, 31, stdin);
+				strcpy(a.direc_alum, direccion);
+				break;
+			case 4:
+				fflush(stdin);
+				puts("Introduce la nueva localidad");
+				fgets(localidad, 31, stdin);
+				strcpy(a.local_alum, localidad);
+				break;
+			case 5:
+				fflush(stdin);
+				puts("Introduce el nuevo curso");
+				fgets(curso, 31, stdin);
+				strcpy(a.curso, curso);
+				break;
+			case 6:
+				fflush(stdin);
+				puts("Introduce el nuevo grupo");
+				fgets(grupo, 11, stdin);
+				strcpy(a.grupo, grupo);
+				break;
+			default:
+				puts("Opcion no valida");
+				break;
+		}
+	}while(salir_menu == 0);
 }
 
 int encontrar_alumno(alumno *a, unsigned n, char *id) {
