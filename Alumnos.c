@@ -12,6 +12,7 @@ int main(){
 	int a;
 	alumno *alumnos = leer_alumnos(&n);
 	char id[7];
+	menu_admin_alumno(alumnos,n);
 //	alumno a;
 //	strcpy(a.id_alumno, "123456");
 //	strcpy(a.nombre_alum, "Alumno");
@@ -50,9 +51,11 @@ void menu_admin_alumno (alumno *a, unsigned n) {
 			encontrado = encontrar_alumno(a, n, id);
 			if(encontrado == -1)
 				puts("Alumno no encontrado");
-			else {
+			else
 				modificar_alumno(a[encontrado]);
-			}
+			break;
+		case 3:
+			add_alumno(a,n);
 			break;
 			
 	}
@@ -63,7 +66,7 @@ int salir_menu() {
 	char opcion;
 	do{
 		fflush(stdin);
-		puts("¿Desea hacer otra operacion? (s/n)");
+		puts("ï¿½Desea hacer otra operacion? (s/n)");
 		scanf("%c",&opcion);
 		switch(opcion){
 			case 'S':
@@ -90,12 +93,46 @@ int salir_menu() {
 	}while(valido == 0);
 	return salir;
 }
+
+void add_alumno(alumno *a, unsigned n) {
+	char id[7], nombre[21], direccion[31], localidad[31], curso[31], grupo[11];
+	FILE *f = fopen("Alumnos.txt","w");
+	a = (alumno *)realloc(a, (n+1) * sizeof(alumno));
+	fflush(stdin);
+	puts("Introduzca la id del nuevo alumno");
+	fgets(id,7,stdin);
+	strcpy(a[n+1].id_alumno,id);
+	fflush(stdin);
+	puts("Introduce el nombre del nuevo alumno");
+	fgets(nombre,21,stdin);
+	strcpy(a[n+1].nombre_alum, nombre);
+	fflush(stdin);
+	puts("Introduce la direccion del nuevo alumno");
+	fgets(direccion,31,stdin);
+	strcpy(a[n+1].direc_alum,direccion);
+	fflush(stdin);
+	puts("Introduce la localidad del nuevo alumno");
+	fgets(localidad,31,stdin);
+	strcpy(a[n+1].local_alum,localidad);
+	fflush(stdin);
+	puts("Introduce el curso del nuevo alumno");
+	fgets(curso,31,stdin);
+	strcpy(a[n+1].curso,curso);
+	fflush(stdin);
+	puts("Introduce el grupo del nuevo alumno");
+	fgets(grupo,11,stdin);
+	strcpy(a[n+1].grupo,grupo);
+
+	guardar_alumno(&a[n+1],f);
+	fclose(f);
+}
+
 void modificar_alumno(alumno a){
 	int op;
 	char id[7], nombre[21], direccion[31], localidad[31], curso[31], grupo[11];
 	puts("Introduzca que desea cambiar");
 	printf("-------------------------\n");
-	printf("1)Id\n2)Nombre\n3)Dirección\n4)Localidad\n5)Curso\n6)Grupo\n");
+	printf("1)Id\n2)Nombre\n3)Direcciï¿½n\n4)Localidad\n5)Curso\n6)Grupo\n");
 	scanf("%i",&op);
 	do{
 		switch(op){

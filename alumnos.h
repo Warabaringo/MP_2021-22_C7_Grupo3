@@ -11,22 +11,27 @@ typedef struct {
 } alumno;
 
 //Cabecera: int encontrar_alumno(alumno *a, unsigned n, char *)
-//Precondición: vector de alumnos inicializado, la id tiene que ser de 7 carácteres
-//Postcondición: Devuelve el número de elemento del alumno, devolverá -1 si no existe
+//Precondiciï¿½n: vector de alumnos inicializado, la id tiene que ser de 7 carï¿½cteres
+//Postcondiciï¿½n: Devuelve el nï¿½mero de elemento del alumno, devolverï¿½ -1 si no existe
 int encontrar_alumno(alumno *a, unsigned n, char *cid);
 // Cabecera: void mostrar_alumno (alumno)
-// Precondición: alumno inicializado
-// Postcondición: Muestra el contenido de alumno
+// Precondiciï¿½n: alumno inicializado
+// Postcondiciï¿½n: Muestra el contenido de alumno
 void mostrar_alumno (const alumno *a);
 
 //Cabecera: alumno *leer_alumnos(unsigned*);
-//Precondición: Ninguna
-//Postcondición: Devuelve a través del puntero pasado el número de alumnos e inicializa el vector de alumnos
+//Precondiciï¿½n: Ninguna
+//Postcondiciï¿½n: Devuelve a travï¿½s del puntero pasado el nï¿½mero de alumnos e inicializa el vector de alumnos
 alumno *leer_alumnos(unsigned *nAlumnos);
 
 //Cabecera: void guardar_alumnos(const alumno *alumnos, unsigned n)
-//Precondición: Ninguna
-//Postcondición: Escribe en el fichero Alumnos.txt los n alumnos pasados
+//Precondiciï¿½n: Ninguna
+//Postcondiciï¿½n: Escribe en el fichero Alumnos.txt los n alumnos pasados
 void guardar_alumnos(const alumno *alumnos, unsigned n);
+
+//Cabecera: void menu_admin_alumno (alumno *a, unsigned n)
+//PrecondiciÃ³n:Vector de alumno inicializado
+//PostcondiciÃ³n: Muestra el menu de administrador para alumnos
+void menu_admin_alumno (alumno *a, unsigned n);
 
 #endif /* ALUMNOS_H */
