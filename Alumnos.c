@@ -55,7 +55,8 @@ void menu_admin_alumno (alumno *a, unsigned n) {
 				modificar_alumno(a[encontrado]);
 			break;
 		case 3:
-			add_alumno(a,n);
+			agregar_alumno(&a,n);
+			n++;
 			break;
 			
 	}
@@ -94,37 +95,41 @@ int salir_menu() {
 	return salir;
 }
 
-void add_alumno(alumno *a, unsigned n) {
-	char id[7], nombre[21], direccion[31], localidad[31], curso[31], grupo[11];
-	FILE *f = fopen("Alumnos.txt","w");
-	a = (alumno *)realloc(a, (n+1) * sizeof(alumno));
+void agregar_alumno(alumno **a, unsigned n) {
+	alumno nuevo;
+	
 	fflush(stdin);
 	puts("Introduzca la id del nuevo alumno");
-	fgets(id,7,stdin);
-	strcpy(a[n+1].id_alumno,id);
+	fgets(nuevo.id_alumno,6,stdin);
+	quitar_salto(nuevo.id_alumno);
+	
 	fflush(stdin);
 	puts("Introduce el nombre del nuevo alumno");
-	fgets(nombre,21,stdin);
-	strcpy(a[n+1].nombre_alum, nombre);
+	fgets(nuevo.nombre_alum,20,stdin);
+	quitar_salto(nuevo.nombre_alum);
+	
 	fflush(stdin);
 	puts("Introduce la direccion del nuevo alumno");
-	fgets(direccion,31,stdin);
-	strcpy(a[n+1].direc_alum,direccion);
+	fgets(nuevo.direc_alum,30,stdin);
+	quitar_salto(nuevo.direc_alum);
+	
 	fflush(stdin);
 	puts("Introduce la localidad del nuevo alumno");
-	fgets(localidad,31,stdin);
-	strcpy(a[n+1].local_alum,localidad);
+	fgets(nuevo.local_alum,30,stdin);
+	quitar_salto(nuevo.local_alum);
+	
 	fflush(stdin);
 	puts("Introduce el curso del nuevo alumno");
-	fgets(curso,31,stdin);
-	strcpy(a[n+1].curso,curso);
+	fgets(nuevo.curso,30,stdin);
+	quitar_salto(nuevo.curso);
+	
 	fflush(stdin);
 	puts("Introduce el grupo del nuevo alumno");
-	fgets(grupo,11,stdin);
-	strcpy(a[n+1].grupo,grupo);
-
-	guardar_alumno(&a[n+1],f);
-	fclose(f);
+	fgets(nuevo.grupo,10,stdin);
+	quitar_salto(nuevo.grupo);
+	
+	*a = realloc(*a, (n+1) * sizeof(alumno));
+	(*a)[n] = nuevo;
 }
 
 void modificar_alumno(alumno a){
@@ -260,4 +265,10 @@ alumno *leer_alumnos(unsigned *nAlumnos) {
 	fclose(f);
 	*nAlumnos = n;
 	return alumnos;
+}
+
+void quitar_salto(char *s) {
+	char *pos = strchr(s, '\n');
+	if(pos != NULL)
+		*pos = '\0';
 }
