@@ -13,10 +13,8 @@ void eliminar_alumno(alumno **a, unsigned n, int pos);
 int existe_alumno (alumno *a, char *s, unsigned n);
 
 int main(){
-	unsigned i, n;
-	int a;
+	unsigned n;
 	alumno *alumnos = leer_alumnos(&n);
-	char id[7];
 	menu_admin_alumno(alumnos,n);
 	free(alumnos);	
 	return 0;
