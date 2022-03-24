@@ -6,20 +6,19 @@
 #include "alumnos.h"
 
 void agregar_alumno(alumno **a, unsigned *n);
-void modificar_alumno(alumno a);
+void modificar_alumno(alumno *a);
 void mostrar_alumnos (const alumno *a, unsigned n);
 void quitar_salto(char *s);
-void eliminar_alumno(alumno **a, unsigned n, int pos);
+void eliminar_alumno(alumno **alumnos, unsigned *n, char *a);
 int existe_alumno (alumno *a, char *s, unsigned n);
 
 int main(){
-	unsigned n;
-	alumno *alumnos = leer_alumnos(&n);
-	menu_admin_alumno(alumnos,n);
-	free(alumnos);	
+	menu_admin_alumno();
 	return 0;
 }
-void menu_admin_alumno (alumno *a, unsigned n) {
+void menu_admin_alumno () {
+	unsigned n;
+	alumno *a = leer_alumnos(&n);
 	int op, encontrado;
 	char id[7];
 	do{
@@ -39,7 +38,7 @@ void menu_admin_alumno (alumno *a, unsigned n) {
 			if(encontrado == -1)
 				puts("Alumno no encontrado");
 			else
-				modificar_alumno(a[encontrado]);
+				modificar_alumno(&a[encontrado]);
 			break;
 		case 3:
 			agregar_alumno(&a,&n);
@@ -48,14 +47,13 @@ void menu_admin_alumno (alumno *a, unsigned n) {
 			fflush(stdin);
 			puts("Introduce la id del alumno para eliminar");
 			scanf("%s", &id);
-			encontrado = encontrar_alumno(a,n,id);
-			eliminar_alumno(&a,n,encontrado);
-			n--;
+			eliminar_alumno(&a,&n, id);
 			break;
 	}
 	}while(salir_menu() == 0);
 	
 	guardar_alumnos(a,n);
+	free(a);
 }
 int salir_menu() {
 	int valido = 0, salir = 0;
@@ -105,7 +103,7 @@ void agregar_alumno(alumno **a, unsigned *n) {
 	fflush(stdin);
 	puts("Introduzca la id del nuevo alumno");
 	fgets(id,7,stdin);
-	if(existe_alumno(*a,id,*n) == 0){
+	if(!existe_alumno(*a,id,*n)){
 		strcpy(nuevo.id_alumno,id);
 		quitar_salto(nuevo.id_alumno);
 	
@@ -136,24 +134,23 @@ void agregar_alumno(alumno **a, unsigned *n) {
 	
 		*a = realloc(*a, (*n+1) * sizeof(alumno));
 		(*a)[*n] = nuevo;
-		*n++;
+		(*n)++;
 	}
 	else
 		puts("Alumno ya existente");
 }
-void eliminar_alumno(alumno **a, unsigned n, int pos) {
-	int i;
-	for (i = pos; i < n; i++) {
-		strcpy((*a)[i].curso, (*a)[i+1].curso);
-		strcpy((*a)[i].direc_alum, (*a)[i+1].direc_alum);
-		strcpy((*a)[i].grupo, (*a)[i+1].grupo);
-		strcpy((*a)[i].id_alumno, (*a)[i+1].id_alumno);
-		strcpy((*a)[i].local_alum, (*a)[i+1].local_alum);
-		strcpy((*a)[i].nombre_alum, (*a)[i+1].nombre_alum);
+void eliminar_alumno(alumno **alumnos, unsigned *n,char *id) {
+	int i, encontrado;
+	
+	encontrado = encontrar_alumno(*alumnos,*n,id);
+	if(encontrado != -1) {
+		for (i = encontrado; i < (*n)-1; i++)
+			(*alumnos)[i] = (*alumnos)[i+1]; 
+		(*n)--;
+		*alumnos = realloc(*alumnos, *n * sizeof(alumno));
 	}
-	*a = realloc(*a, (n-1) * sizeof(alumno));
 }
-void modificar_alumno(alumno a){
+void modificar_alumno(alumno *a){
 	int op;
 	char id[7], nombre[21], direccion[31], localidad[31], curso[31], grupo[11];
 	puts("Introduzca que desea cambiar");
@@ -166,37 +163,37 @@ void modificar_alumno(alumno a){
 				fflush(stdin);
 				puts("Introduzca la nueva id");
 				fgets(id, 7, stdin);
-				strcpy(a.id_alumno,id);
+				strcpy(a->curso,id);
 				break;
 			case 2:
 				fflush(stdin);
 				puts("Introduzca el nuevo nombre");
 				fgets(nombre,21, stdin);
-				strcpy(a.nombre_alum, nombre);
+				strcpy(a->nombre_alum, nombre);
 				break;
 			case 3:
 				fflush(stdin);
 				puts("Introduce la nueva direccion");
 				fgets(direccion, 31, stdin);
-				strcpy(a.direc_alum, direccion);
+				strcpy(a->direc_alum, direccion);
 				break;
 			case 4:
 				fflush(stdin);
 				puts("Introduce la nueva localidad");
 				fgets(localidad, 31, stdin);
-				strcpy(a.local_alum, localidad);
+				strcpy(a->local_alum, localidad);
 				break;
 			case 5:
 				fflush(stdin);
 				puts("Introduce el nuevo curso");
 				fgets(curso, 31, stdin);
-				strcpy(a.curso, curso);
+				strcpy(a->curso, curso);
 				break;
 			case 6:
 				fflush(stdin);
 				puts("Introduce el nuevo grupo");
 				fgets(grupo, 11, stdin);
-				strcpy(a.grupo, grupo);
+				strcpy(a->grupo, grupo);
 				break;
 			default:
 				puts("Opcion no valida");
