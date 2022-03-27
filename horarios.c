@@ -7,7 +7,7 @@ void menu_admin_horarios() {
 	horario *horarios = leer_horarios(&nHorarios);
 	
 	puts("Introduzca la operacion deseada: agregar horas de clase(1), eliminar horas(2), modificar horas(3), listar horarios(4), salir(0)");
-	printf("%i", &op);
+	scanf("%i", &op);
 	do{
 		switch(op){
 			case 1:
