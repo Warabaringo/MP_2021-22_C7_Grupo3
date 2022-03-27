@@ -111,7 +111,7 @@ void mostrar_horarios(horario *horarios, unsigned nHorarios) {
 }
 
 void mostrar_horario(const horario *hor) {
-	static char *nombre_dias[5] = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" };
+	static char *nombre_dias[5] = { "Lunes", "Martes", "MiÃ©rcoles", "Jueves", "Viernes" };
 	static char *nombre_horas[6] = {"Primera", "Segunda", "Tercera", "Cuarta", "Quinta", "Sexta"};
 	
 		
