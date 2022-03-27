@@ -1,22 +1,16 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "horarios.h"
-#include "alumnos.h"
-
 
 int main() {
-	unsigned n;
-	horario *horarios = leer_horarios(&n);
-	
-	free(horarios);
+	menu_admin_horarios();
 	
 	return 0;
 }
 
-void menu_admin_horarios(horario *horarios, unsigned nHorarios) {
-	int op, encontrado;
+void menu_admin_horarios() {
+	unsigned nHorarios;
+	int op, encontrado, salir;
 	char id[4];
+	horario *horarios = leer_horarios(&nHorarios);
 	
 	puts("Introduzca la operacion deseada: agregar horas de clase(1), eliminar horas(2), modificar horas(3), listar horarios(4), salir(0)");
 	printf("%i", &op);
@@ -25,16 +19,16 @@ void menu_admin_horarios(horario *horarios, unsigned nHorarios) {
 			case 1:
 				puts("Introduce id de profesor");
 				scanf("%s", &id);
-				if((econtrado = encontrar_profesor(horarios, id, nHorarios)) == -1)
+				if((encontrado = encontrar_profesor(horarios, id, nHorarios)) == -1)
 					puts("Profesor no encontrado");
-				else {
+				else 
 					agregar_horas(&horarios[encontrado]);
-				}
+				
 				break;
 			case 2:
 				puts("Introduce id de profesor");
 				scanf("%s", &id);
-				if((econtrado = encontrar_profesor(horarios, id, nHorarios)) == -1)
+				if((encontrado = encontrar_profesor(horarios, id, nHorarios)) == -1)
 					puts("Profesor no encontrado");
 				else {
 					eliminar_horas(&horarios[encontrado]);
@@ -43,7 +37,7 @@ void menu_admin_horarios(horario *horarios, unsigned nHorarios) {
 			case 3:
 				puts("Introduce id de profesor");
 				scanf("%s", &id);
-				if((econtrado = encontrar_profesor(horarios, id, nHorarios)) == -1)
+				if((encontrado = encontrar_profesor(horarios, id, nHorarios)) == -1)
 					puts("Profesor no encontrado");
 				else {
 					modificar_horas(&horarios[encontrado]);
@@ -53,7 +47,8 @@ void menu_admin_horarios(horario *horarios, unsigned nHorarios) {
 				mostrar_horarios(horarios, nHorarios);
 				break;
 		}
-	}while(salir_menu() == 0);
+		salir = salir_menu();
+	}while(salir == 0);
 }
 
 int encontrar_profesor(horario *horarios, char *idProfesor, unsigned nHorarios) {
@@ -94,7 +89,7 @@ void eliminar_horas(horario *hor) {
 
 }
 
-void modificar_horas(horarios *hor) {
+void modificar_horas(horario *hor) {
 	unsigned horas;
 	
 	puts("Introduzca el numero de horas nuevo");
@@ -111,14 +106,18 @@ void mostrar_horarios(horario *horarios, unsigned nHorarios) {
 	int i;
 	
 	for(i = 0; i < nHorarios; i++)
-		mostrar_horario(&horario[i]);
+		mostrar_horario(&horarios[i]);
 		
 }
 
 void mostrar_horario(const horario *hor) {
+	static char *nombre_dias[5] = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" };
+	static char *nombre_horas[6] = {"Primera", "Segunda", "Tercera", "Cuarta", "Quinta", "Sexta"};
+	
+		
 	printf("Id Profesor: %s\n", hor->id_profesor);
-	printf("Dia de clase: %i\n", hor->dia_clase);
-	printf("Hora de clase: %i\n", hor->hora_clase);
+	printf("Dia de clase: %i\n", nombre_dias[hor->dia_clase - 1]);
+	printf("Hora de clase: %i\n", nombre_horas[hor->hora_clase-1]);
 	printf("Id materia: %s\n", hor->id_materia);
 	printf("Grupo: %s\n", hor->grupo);
 }

@@ -1,6 +1,10 @@
 #ifndef ALUMNOS_H
 #define ALUMNOS_H
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 typedef struct {
 	char id_alumno[7];
 	char nombre_alum[21];
@@ -11,67 +15,68 @@ typedef struct {
 } alumno;
 
 //Cabecera: int encontrar_alumno(alumno *a, unsigned n, char *)
-//Precondiciï¿½n: vector de alumnos inicializado, la id tiene que ser de 7 carï¿½cteres
-//Postcondiciï¿½n: Devuelve el nï¿½mero de elemento del alumno, devolverï¿½ -1 si no existe
+//Precondici?n: vector de alumnos inicializado, la id tiene que ser de 7 car?cteres
+//Postcondici?n: Devuelve el n?mero de elemento del alumno, devolver? -1 si no existe
 int encontrar_alumno(alumno *a, unsigned n, char *cid);
 
 // Cabecera: void mostrar_alumno (alumno)
-// Precondiciï¿½n: alumno inicializado
-// Postcondiciï¿½n: Muestra el contenido de alumno
+// Precondici?n: alumno inicializado
+// Postcondici?n: Muestra el contenido de alumno
 void mostrar_alumno (const alumno *a);
 
 //Cabecera: alumno *leer_alumnos(unsigned*);
-//Precondiciï¿½n: Ninguna
-//Postcondiciï¿½n: Devuelve a travï¿½s del puntero pasado el nï¿½mero de alumnos e inicializa el vector de alumnos
+//Precondici?n: Ninguna
+//Postcondici?n: Devuelve a trav?s del puntero pasado el n?mero de alumnos e inicializa el vector de alumnos
 alumno *leer_alumnos(unsigned *nAlumnos);
 
 //Cabecera: void guardar_alumnos(const alumno *alumnos, unsigned n)
-//Precondiciï¿½n: Ninguna
-//Postcondiciï¿½n: Escribe en el fichero Alumnos.txt los n alumnos pasados
+//Precondici?n: Ninguna
+//Postcondici?n: Escribe en el fichero Alumnos.txt los n alumnos pasados
 void guardar_alumnos(const alumno *alumnos, unsigned n);
 
 //Cabecera: void menu_admin_alumno (alumno *a, unsigned n)
-//PrecondiciÃ³n:Vector de alumno inicializado
-//PostcondiciÃ³n: Muestra el menu de administrador para alumnos
-void menu_admin_alumno (alumno *a, unsigned n);
+//Precondición:Vector de alumno inicializado
+//Postcondición: Muestra el menu de administrador para alumnos
+void menu_admin_alumno();
 
 //Cabecera: int salir_menu();
-//PrecondiciÃ³n: Ninguna
-//PostcondiciÃ³n: Devuelve 1 si se quiere salir del menÃº y 0 si no
+//Precondición: Ninguna
+//Postcondición: Devuelve 1 si se quiere salir del menú y 0 si no
 int salir_menu();
 
 //Cabecera: void agregar_alumno(alumno **a, unsigned *n)
-//PrecondiciÃ³n: n es el nÃºmero de alumnos y el vector a tiene que estar inicializado
-//PostcondiciÃ³n: Agrega un nuevo alumno introducido por el usuario
+//Precondición: n es el número de alumnos y el vector a tiene que estar inicializado
+//Postcondición: Agrega un nuevo alumno introducido por el usuario
 void agregar_alumno(alumno **a, unsigned *n);
 
 //Cabecera: void modificar_alumno(alumno a)
-//PrecondiciÃ³n: Ninguna
-//PostcondiciÃ³n: Modifica el alumno introducido segÃºn quiera el usuario
-void modificar_alumno(alumno a);
+//Precondición: Ninguna
+//Postcondición: Modifica el alumno introducido según quiera el usuario
+void modificar_alumno(alumno *a);
 
 //Cabecera: void mostrar_alumnos (const alumno *a, unsigned n)
-//PrecondiciÃ³n: n es el nÃºmero de alumnos
-//PostcondiciÃ³n: Muestra todos los alumnos del vector
+//Precondición: n es el número de alumnos
+//Postcondición: Muestra todos los alumnos del vector
 void mostrar_alumnos (const alumno *a, unsigned n);
 
 //Cabecera: void quitar_salto(char *s)
-//PrecondiciÃ³n: Ninguna
-//PostcondiciÃ³n: Quita de la cadena el carÃ¡cter '\n'
+//Precondición: Ninguna
+//Postcondición: Quita de la cadena el carácter '\n'
 void quitar_salto(char *s);
 
 //Cabecera: void eliminar_alumno(alumno **a, unsigned n, int pos)
-//PrecondiciÃ³n: n es el nÃºmero de alumnos y pos es la posiciÃ³n del alumno en el vector
-//PostcondiciÃ³n: Elimina el alumno de la posiciÃ³n indicada
-void eliminar_alumno(alumno **a, unsigned n, int pos);
+//Precondición: n es el número de alumnos y pos es la posición del alumno en el vector
+//Postcondición: Elimina el alumno de la posición indicada
+void eliminar_alumno(alumno **alumnos, unsigned *n,char *id);
 
 //Cabecera: int existe alumno(alumno *a, char *s, unsigned n)
-//PrecondiciÃ³n: s es la id del alumno a encontrar y n es el nÃºmero de alumnos
-//PostcondiciÃ³n: Devuelve 1 si el alumno existe y 0 si no
+//Precondición: s es la id del alumno a encontrar y n es el número de alumnos
+//Postcondición: Devuelve 1 si el alumno existe y 0 si no
 int existe_alumno (alumno *a, char *s, unsigned n);
 
 //Cabecera: void guardar_alumno (const alumno *a, FILE *f)
-//PrecondiciÃ³n: Fichero abierto para escritura
-//PostcondiciÃ³n: Guarda el alumno en el fichero
+//Precondición: Fichero abierto para escritura
+//Postcondición: Guarda el alumno en el fichero
 void guardar_alumno(const alumno *a, FILE *f);
+
 #endif /* ALUMNOS_H */

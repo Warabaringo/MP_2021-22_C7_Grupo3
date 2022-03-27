@@ -1,21 +1,6 @@
 // Alumnos.txt
-
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "alumnos.h"
 
-void agregar_alumno(alumno **a, unsigned *n);
-void modificar_alumno(alumno *a);
-void mostrar_alumnos (const alumno *a, unsigned n);
-void quitar_salto(char *s);
-void eliminar_alumno(alumno **alumnos, unsigned *n, char *a);
-int existe_alumno (alumno *a, char *s, unsigned n);
-
-int main(){
-	menu_admin_alumno();
-	return 0;
-}
 void menu_admin_alumno () {
 	unsigned n;
 	alumno *a = leer_alumnos(&n);
