@@ -1,11 +1,5 @@
 #include "horarios.h"
 
-int main() {
-	menu_admin_horarios();
-	
-	return 0;
-}
-
 void menu_admin_horarios() {
 	unsigned nHorarios;
 	int op, encontrado, salir;
