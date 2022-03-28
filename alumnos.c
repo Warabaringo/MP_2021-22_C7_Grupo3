@@ -196,6 +196,19 @@ int encontrar_alumno(alumno *a, unsigned n, char *id) {
 	}
 	return encontrado;
 }
+
+int existe_grupo(alumno *a, unsigned n, char *grupo) {
+	int i, existe = 0;
+	
+	while(i < n && existe == 0) {
+		if(strcmp(grupo, a.grupo))
+			existe = 1;
+		i++;
+	}
+	
+	return existe;
+}
+
 //Cabecera: mostrar_alumnos (const alumno *a, unsigned n)
 //Precondici�n: Alumno inicializado
 //Postcondici�n: Muestra por pantalla los n alumnos

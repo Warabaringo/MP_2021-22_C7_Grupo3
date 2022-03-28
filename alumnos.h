@@ -79,4 +79,6 @@ int existe_alumno (alumno *a, char *s, unsigned n);
 //Postcondición: Guarda el alumno en el fichero
 void guardar_alumno(const alumno *a, FILE *f);
 
+int existe_grupo(alumno *a, unsigned n, char *grupo);
+
 #endif /* ALUMNOS_H */

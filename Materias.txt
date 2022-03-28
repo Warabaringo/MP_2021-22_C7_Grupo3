@@ -1,0 +1,7 @@
+0001 - Matematicas discretas - MD
+
+0002 - Metodologia de la programacion - MP
+
+0003 - Algebra - ALG
+
+0004 - Calculo - CAL

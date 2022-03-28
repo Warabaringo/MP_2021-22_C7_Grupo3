@@ -5,6 +5,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include "alumnos.h"
+#include "Materias.h"
+#include "usuarios.h"
 
 typedef struct {
     char id_profesor[4];
@@ -16,9 +18,7 @@ typedef struct {
 
 void menu_admin_horarios();
 
-int encontrar_profesor(horario *horarios, char *idProfesor, unsigned nHorarios);
-
-void agregar_horas(horario *hor);
+void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno *alumnos, unsigned nUsuarios, unsigned nMaterias, unsigned nAlumnos);
 
 void eliminar_horas(horario *hor);
 

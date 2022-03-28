@@ -5,19 +5,14 @@ void menu_admin_horarios() {
 	int op, encontrado, salir;
 	char id[4];
 	horario *horarios = leer_horarios(&nHorarios);
+	usuario *usuarios;
 	
 	puts("Introduzca la operacion deseada: agregar horas de clase(1), eliminar horas(2), modificar horas(3), listar horarios(4), salir(0)");
 	scanf("%i", &op);
 	do{
 		switch(op){
 			case 1:
-				puts("Introduce id de profesor");
-				scanf("%s", &id);
-				if((encontrado = encontrar_profesor(horarios, id, nHorarios)) == -1)
-					puts("Profesor no encontrado");
-				else 
-					agregar_horas(&horarios[encontrado]);
-				
+				agregar_horario(&horarios);
 				break;
 			case 2:
 				puts("Introduce id de profesor");
@@ -43,34 +38,34 @@ void menu_admin_horarios() {
 		}
 		salir = salir_menu();
 	}while(salir == 0);
+	free(horarios);
 }
 
-int encontrar_profesor(horario *horarios, char *idProfesor, unsigned nHorarios) {
-	int i = 0, encontrado = -1;
-	
-	while(encontrado == -1 && i < nHorarios) {
-		if(strcmp(horarios[i].id_profesor, idProfesor) == 0)
-			encontrado = i;
-		i++;
+void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno *alumnos, unsigned nUsuarios, unsigned nMaterias, unsigned nAlumnos) {
+	horario nuevo;
+	fflush(stdin);
+	puts("Introduce el id de profesor");
+	scanf("%s", &nuevo.id_profesor);
+	fflush(stdin);
+	puts("Introduce el id de la materia");
+	scanf("%s", &nuevo.id_materia);
+	fflush(stdin);
+	puts("Introduce el grupo");
+	scanf("%s", &nuevo.grupo);
+	if(encontrar_profesor(usuarios, nuevo.id_profesor,nUsuarios) == -1 || encontrar_materia(materias, nuevo.id_materia,nMaterias) == -1 || 	existe_grupo(alumnos, nAlumnos, nuevo.grupo) == 0)
+		puts("No existe alguno de los datos introducidos");
+	else {
+		fflush(stdin);
+		puts("Introduce la hora de clase");
+		scanf("%s", &nuevo.hora_clase);
+		fflush(stdin);
+		puts("Introduce el dia de clase");
+		scanf("%s", &nuevo.dia_clase);	
 	}
 	
-	return encontrado;
 }
 
-void agregar_horas(horario *hor) {
-	unsigned horas;
-	
-	puts("Introduzca el numero de horas para agregar");
-	scanf("%u", &horas);
-	
-	if((horas+hor->hora_clase) > 6)
-		puts("El numero de horas introducido excede el limite permitido, es mayor a 6");
-	else
-		hor->hora_clase = hor->hora_clase + horas;
-	
-}
-
-void eliminar_horas(horario *hor) {
+void eliminar_horas(horario **hor) {
 	unsigned horas;
 	
 	puts("Introduzca el numero de horas para eliminar");
@@ -105,13 +100,13 @@ void mostrar_horarios(horario *horarios, unsigned nHorarios) {
 }
 
 void mostrar_horario(const horario *hor) {
-	static char *nombre_dias[5] = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes" };
+	static char *nombre_dias[5] = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes" };
 	static char *nombre_horas[6] = {"Primera", "Segunda", "Tercera", "Cuarta", "Quinta", "Sexta"};
 	
 		
 	printf("Id Profesor: %s\n", hor->id_profesor);
-	printf("Dia de clase: %i\n", nombre_dias[hor->dia_clase - 1]);
-	printf("Hora de clase: %i\n", nombre_horas[hor->hora_clase-1]);
+	printf("Dia de clase: %s\n", nombre_dias[hor->dia_clase - 1]);
+	printf("Hora de clase: %s\n", nombre_horas[hor->hora_clase-1]);
 	printf("Id materia: %s\n", hor->id_materia);
 	printf("Grupo: %s\n", hor->grupo);
 }
@@ -138,11 +133,23 @@ horario *leer_horarios(unsigned *nHorarios){
 
 
         n++;
-        horarios = (horario*) realloc(horarios, n *sizeof(horarios));
+        horarios = (horario*) realloc(horarios, n *sizeof(horario));
         horarios[n-1] = hor;
     }
     fclose(f);
     *nHorarios = n;
     
     return horarios;
+}
+
+int encontrar_materia(materia *materias, char *idMateria, unsigned nMaterias) {
+	int i, encontrado = -1;
+	
+	while (i < nMateria && encontrado == -1) {
+		if(strcmp(idMateria, materias.Id_materia) == 0)
+			encontrado = i;
+		i++;
+	}
+	
+	return encontrado;
 }
