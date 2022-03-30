@@ -18,9 +18,9 @@ typedef struct {
 
 void menu_admin_horarios();
 
-void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno *alumnos, unsigned nUsuarios, unsigned nMaterias, unsigned nAlumnos);
+void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno *alumnos, unsigned nUsuarios, unsigned nMaterias, unsigned nAlumnos, unsigned *nHorarios);
 
-void eliminar_horas(horario *hor);
+void eliminar_horario(horario **hor, int encontrado, unsigned *nHorarios)
 
 void modificar_horas(horario *hor);
 

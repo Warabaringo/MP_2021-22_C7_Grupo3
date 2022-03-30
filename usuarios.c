@@ -1,5 +1,12 @@
 #include "usuarios.h"
-
+usuario *leer_usuarios(unsigned *nUsuarios);
+int main () {
+	unsigned n;
+	usuario *u = leer_usuario(&n);
+	
+	free(u);
+	return 0;
+}
 usuario *leer_usuarios(unsigned *nUsuarios){
     usuario *usuarios = NULL;
     usuario user;
@@ -31,7 +38,7 @@ usuario *leer_usuarios(unsigned *nUsuarios){
     return usuarios;
 }
 
-void encontrar_profesor(usuario *usuarios, char *idProfesor, unsigned nUsuario){
+/* void encontrar_profesor(usuario *usuarios, char *idProfesor, unsigned nUsuario){
 	int encontrado = -1, i;
 	
 	while(i < nUsuario && encontrado == -1) {
@@ -39,4 +46,4 @@ void encontrar_profesor(usuario *usuarios, char *idProfesor, unsigned nUsuario){
 			encontrado = i;
 		i++;
 	}
-}
+} */

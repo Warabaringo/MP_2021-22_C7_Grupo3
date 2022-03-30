@@ -1,27 +1,26 @@
 #include "horarios.h"
 
 void menu_admin_horarios() {
-	unsigned nHorarios;
+	unsigned nHorarios, nUsuarios, nAlumnos, nMaterias;
 	int op, encontrado, salir;
 	char id[4];
 	horario *horarios = leer_horarios(&nHorarios);
-	usuario *usuarios;
+	usuario *usuarios = leer_usuarios(&nUsuarios);
+	alumno *alumnos = leer_alumnos(&nAlumnos);
+	materia *materias = leer_materia(&nMaterias);
 	
 	puts("Introduzca la operacion deseada: agregar horas de clase(1), eliminar horas(2), modificar horas(3), listar horarios(4), salir(0)");
 	scanf("%i", &op);
 	do{
 		switch(op){
 			case 1:
-				agregar_horario(&horarios);
+				agregar_horario(&horarios, usuarios, materias, alumnos, nUsuarios, nMaterias, nAlumnos, &nHorarios);
 				break;
 			case 2:
-				puts("Introduce id de profesor");
-				scanf("%s", &id);
-				if((encontrado = encontrar_profesor(horarios, id, nHorarios)) == -1)
-					puts("Profesor no encontrado");
-				else {
-					eliminar_horas(&horarios[encontrado]);
-				}
+				mostrar_horarios(horarios, nHorarios);
+				puts("Introduce el horario que desee eliminar");
+				scanf("%i", &encontrado);
+				eliminar_horas(&horarios, encontrado-1);
 				break;
 			case 3:
 				puts("Introduce id de profesor");
@@ -41,7 +40,7 @@ void menu_admin_horarios() {
 	free(horarios);
 }
 
-void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno *alumnos, unsigned nUsuarios, unsigned nMaterias, unsigned nAlumnos) {
+void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno *alumnos, unsigned nUsuarios, unsigned nMaterias, unsigned nAlumnos, unsigned *nHorarios) {
 	horario nuevo;
 	fflush(stdin);
 	puts("Introduce el id de profesor");
@@ -60,22 +59,22 @@ void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno
 		scanf("%s", &nuevo.hora_clase);
 		fflush(stdin);
 		puts("Introduce el dia de clase");
-		scanf("%s", &nuevo.dia_clase);	
+		scanf("%s", &nuevo.dia_clase);
+		*hor = realloc(*hor,(*n+1) * sizeof(horario));
+		(*hor)[*n] = nuevo;
+		(*n)++;
 	}
 	
 }
 
-void eliminar_horas(horario **hor) {
-	unsigned horas;
+void eliminar_horario(horario **hor, int encontrado, unsigned *nHorarios) {
+	int i;
 	
-	puts("Introduzca el numero de horas para eliminar");
-	scanf("%u", &horas);
-	
-	if((hor->hora_clase - horas) < 1)
-		puts("El numero de horas introducido excede el limite permitido, es menor a 1");
-	else
-		hor->hora_clase = hor->hora_clase - horas;
+	for(i = encontrado; i < (*nHorario)-1; i++)
+		(*hor)[i] = (*hor)[i+1]
 
+	(*nHorarios)--;
+	*hor = realloc(*hor, *nHorarios * sizeof(hor));
 }
 
 void modificar_horas(horario *hor) {
@@ -94,9 +93,11 @@ void modificar_horas(horario *hor) {
 void mostrar_horarios(horario *horarios, unsigned nHorarios) {
 	int i;
 	
-	for(i = 0; i < nHorarios; i++)
+	for(i = 0; i < nHorarios; i++) ´{
+		printf("HORARIO NUMERO %i\n", i+1);
+		puts("-------------------------");	
 		mostrar_horario(&horarios[i]);
-		
+	}
 }
 
 void mostrar_horario(const horario *hor) {
