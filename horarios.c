@@ -1,18 +1,39 @@
 #include "horarios.h"
 
+/**
+*										*
+*	DEFINICIÓN DE FUNCIONES PRIVADAS 	*
+*										*
+**/
+int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n);
+int profesor_libre(const horario *nuevo, const horario *horarios, unsigned n);
+
+
 void menu_admin_horarios() {
 	unsigned nHorarios, nUsuarios, nAlumnos, nMaterias;
-	int op, encontrado, salir;
+	int op, encontrado;
 	char id[4];
 	horario *horarios = leer_horarios(&nHorarios);
 	usuario *usuarios = leer_usuarios(&nUsuarios);
 	alumno *alumnos = leer_alumnos(&nAlumnos);
 	materia *materias = leer_materia(&nMaterias);
 	
-	puts("Introduzca la operacion deseada: agregar horas de clase(1), eliminar horas(2), modificar horas(3), listar horarios(4), salir(0)");
-	scanf("%i", &op);
-	do{
+	
+	
+	do {
+		
+		puts("Seleccione la operacion deseada:");
+		puts("	1.- Agregar horas de clase");
+		puts("	2.- Eliminar horas de clase");
+		puts("	3.- Modificar horas de clase");
+		puts("	4.- Mostrar horarios de clase");
+		puts("	0.- Salir");
+		scanf("%i", &op);
+		
 		switch(op){
+			case 0:
+				puts("Salir");
+				break;
 			case 1:
 				agregar_horario(&horarios, usuarios, materias, alumnos, nUsuarios, nMaterias, nAlumnos, &nHorarios);
 				break;
@@ -31,11 +52,19 @@ void menu_admin_horarios() {
 			case 4:
 				mostrar_horarios(horarios, nHorarios);
 				break;
+			default:
+				puts("Operacion no valida");
+				break;
 		}
-		salir = salir_menu();
-	}while(salir == 0);
+	}while(op != 0);
 	
+	
+	guardar_horarios(horarios, nHorarios);
 	free(horarios);
+	free(alumnos);
+	free(materias);
+	free(usuarios);
+	
 }
 
 void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno *alumnos, 
@@ -44,15 +73,18 @@ void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno
 	
 	fflush(stdin);
 	puts("Introduce el id de profesor");
-	scanf("%s", &nuevo.id_profesor);
+	fgets(nuevo.id_profesor, 4, stdin);
+	quitar_salto(nuevo.id_profesor);
 	
 	fflush(stdin);
 	puts("Introduce el id de la materia");
-	scanf("%s", &nuevo.id_materia);
+	fgets(nuevo.id_materia, 5, stdin);
+	quitar_salto(nuevo.id_materia);
 	
 	fflush(stdin);
 	puts("Introduce el grupo");
-	scanf("%s", &nuevo.grupo);
+	fgets(nuevo.grupo, 11, stdin);
+	quitar_salto(nuevo.grupo);
 	
 	if(encontrar_profesor(usuarios, nuevo.id_profesor, nUsuarios) == -1 ||
 			encontrar_materia(materias, nuevo.id_materia, nMaterias) == -1 ||
@@ -187,8 +219,24 @@ horario *leer_horarios(unsigned *nHorarios){
     return horarios;
 }
 
+void guardar_horarios(const horario *horarios, unsigned n) {
+	FILE *f = fopen("Horarios.txt","w");
+	unsigned i;
+	for(i = 0; i < n; i++)
+		guardar_horario(&horarios[i], f);
+	fclose(f);
+}
+
+void guardar_horario (const horario *h, FILE *f) {
+	fprintf(f,"%s-", h->id_profesor);
+	fprintf(f,"%i-", h->dia_clase);
+	fprintf(f,"%i-", h->hora_clase);
+	fprintf(f,"%s-", h->id_materia);
+	fprintf(f,"%s", h->grupo);
+}
+
 int encontrar_materia(materia *materias, char *idMateria, unsigned nMaterias) {
-	int i, encontrado = -1;
+	int i = 0, encontrado = -1;
 	
 	while (i < nMaterias && encontrado == -1) {
 		if(strcmp(idMateria, materias[i].Id_materia) == 0)
@@ -202,14 +250,14 @@ int encontrar_materia(materia *materias, char *idMateria, unsigned nMaterias) {
 int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n) {
 	int libre = 1, i = 0, dia_clase, hora_clase;
 	char grupo[11];
-	horario *actual;
+	const horario *actual;
 	
 	dia_clase = nuevo->dia_clase;
 	hora_clase = nuevo->hora_clase;
 	strcpy(grupo, nuevo->grupo);
 	
 	while(libre && i < n) {
-		actual = *horarios + i;
+		actual = horarios + i;
 		if(actual->dia_clase == dia_clase && 
 				actual->hora_clase == hora_clase &&
 				strcmp(actual->grupo, grupo) == 0)
@@ -223,7 +271,7 @@ int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n) {
 int profesor_libre(const horario *nuevo, const horario *horarios, unsigned n) {
 	int libre = 1, i = 0, dia_clase, hora_clase;
 	char id_profesor[4];
-	horario *actual;
+	const horario *actual;
 	
 	dia_clase = nuevo->dia_clase;
 	hora_clase = nuevo->hora_clase;

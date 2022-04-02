@@ -28,11 +28,11 @@ void modificar_horario(horario *hor, materia *materias, usuario *usuarios, alumn
 
 void mostrar_horarios(horario *horarios, unsigned nHorarios);
 
+void guardar_horarios(const horario *horarios, unsigned n);
+
+void guardar_horario (const horario *h, FILE *f);
+
 horario *leer_horarios(unsigned *nHorarios);
-
-int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n);
-
-int profesor_libre(const horario *nuevo, const horario *horarios, unsigned n);
 
 void mostrar_horario(const horario *hor);
 #endif /* HORARIOS_H */

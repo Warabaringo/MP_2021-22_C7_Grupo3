@@ -198,10 +198,10 @@ int encontrar_alumno(alumno *a, unsigned n, char *id) {
 }
 
 int existe_grupo(alumno *a, unsigned n, char *grupo) {
-	int i, existe = 0;
+	int i = 0, existe = 0;
 	
 	while(i < n && !existe) {
-		if(strcmp(grupo, a[i].grupo))
+		if(strcmp(grupo, a[i].grupo) == 0)
 			existe = 1;
 		i++;
 	}

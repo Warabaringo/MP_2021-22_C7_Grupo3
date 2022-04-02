@@ -5,7 +5,7 @@
 #include<string.h>
 
 typedef struct{
-char Id_materia [4];
+char Id_materia [5];
 char Nombre_materia [50];
 char Abrev_materia [3];
 }materia;

@@ -8,7 +8,7 @@
 typedef struct{
 	char Id_usuario[4];
 	char Nomb_usuario[21];
-	char *Perfil_usuario;
+	char Perfil_usuario[15];
 	char Usuario[6];
 	char contrasena[9];
 	int lleno;

@@ -1,21 +1,14 @@
 #include "usuarios.h"
 
-int main () {
-	unsigned n;
-	usuario *u = leer_usuario(&n);
-	
-	free(u);
-	return 0;
-}
 usuario *leer_usuarios(unsigned *nUsuarios){
     usuario *usuarios = NULL;
     usuario user;
 
     FILE *f = fopen("Usuarios.txt", "r");
-    char linea[60], *token;
+    char linea[61], *token;
     unsigned n = 0;
 
-    while(fgets(linea, 21, f) != NULL) {
+    while(fgets(linea, 60, f) != NULL) {
         token = strtok(linea, "-");
         strcpy(user.Id_usuario, token);
         token = strtok(NULL, "-");
@@ -38,12 +31,14 @@ usuario *leer_usuarios(unsigned *nUsuarios){
     return usuarios;
 }
 
-/* void encontrar_profesor(usuario *usuarios, char *idProfesor, unsigned nUsuario){
-	int encontrado = -1, i;
+int encontrar_profesor(usuario *usuarios, char *idProfesor, unsigned nUsuario){
+	int encontrado = -1, i = 0;
 	
 	while(i < nUsuario && encontrado == -1) {
-		if(strcmp(&usuarios[i].Id_usuario, idProfesor) == 0)
+		if(strcmp(usuarios[i].Id_usuario, idProfesor) == 0)
 			encontrado = i;
 		i++;
 	}
-} */
+	
+	return encontrado;
+} 

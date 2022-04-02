@@ -133,7 +133,7 @@ printf("%s%s%s\n",vMaterias[i].Id_materia,vMaterias[i].Nombre_materia,vMaterias[
 
 
 materia *leer_materia(unsigned *nMaterias) {
-	materia *vMaterias = NULL;
+	materia *materias = NULL;
 	materia a;
 	FILE *f = fopen("Materias.txt", "r");
 	char linea[127], *token;
@@ -146,7 +146,7 @@ materia *leer_materia(unsigned *nMaterias) {
 		strcpy(a.Nombre_materia, token);
 		token = strtok(NULL, "-");
 		strcpy(a.Abrev_materia, token);
-		token = strtok(NULL, "-");
+		token = strtok(NULL, "\n");
 			
 		n++;
 		materias = (materia*)realloc(materias, n * sizeof(materia));
