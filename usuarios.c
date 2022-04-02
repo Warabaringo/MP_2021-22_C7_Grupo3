@@ -1,5 +1,5 @@
 #include "usuarios.h"
-usuario *leer_usuarios(unsigned *nUsuarios);
+
 int main () {
 	unsigned n;
 	usuario *u = leer_usuario(&n);

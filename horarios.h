@@ -18,15 +18,21 @@ typedef struct {
 
 void menu_admin_horarios();
 
-void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno *alumnos, unsigned nUsuarios, unsigned nMaterias, unsigned nAlumnos, unsigned *nHorarios);
+void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno *alumnos, 
+		unsigned nUsuarios, unsigned nMaterias, unsigned nAlumnos, unsigned *nHorarios);
 
-void eliminar_horario(horario **hor, int encontrado, unsigned *nHorarios)
+void eliminar_horario(horario **hor, int encontrado, unsigned *nHorarios);
 
-void modificar_horas(horario *hor);
+void modificar_horario(horario *hor, materia *materias, usuario *usuarios, alumno *alumnos,	
+		unsigned *nHorarios, unsigned nMaterias, unsigned nUsuarios, unsigned nAlumnos, int encontrado);
 
 void mostrar_horarios(horario *horarios, unsigned nHorarios);
 
 horario *leer_horarios(unsigned *nHorarios);
+
+int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n);
+
+int profesor_libre(const horario *nuevo, const horario *horarios, unsigned n);
 
 void mostrar_horario(const horario *hor);
 #endif /* HORARIOS_H */

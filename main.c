@@ -7,7 +7,6 @@
 
 
 int main() {
-	unsigned n;
-	
+	menu_admin_horarios();
 	return 0;
 }
