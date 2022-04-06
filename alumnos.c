@@ -140,7 +140,7 @@ void modificar_alumno(alumno *a){
 	char id[7], nombre[21], direccion[31], localidad[31], curso[31], grupo[11];
 	puts("Introduzca que desea cambiar");
 	printf("-------------------------\n");
-	printf("1)Id\n2)Nombre\n3)Direcci�n\n4)Localidad\n5)Curso\n6)Grupo\n");
+	printf("1)Id\n2)Nombre\n3)Direccion\n4)Localidad\n5)Curso\n6)Grupo\n");
 	scanf("%i",&op);
 	do{
 		switch(op){

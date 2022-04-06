@@ -8,7 +8,6 @@
 int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n);
 int profesor_libre(const horario *nuevo, const horario *horarios, unsigned n);
 
-
 void menu_admin_horarios() {
 	unsigned nHorarios, nUsuarios, nAlumnos, nMaterias;
 	int op, encontrado;
@@ -38,15 +37,19 @@ void menu_admin_horarios() {
 				agregar_horario(&horarios, usuarios, materias, alumnos, nUsuarios, nMaterias, nAlumnos, &nHorarios);
 				break;
 			case 2:
-				mostrar_horarios(horarios, nHorarios);
-				puts("Introduce el horario que desee eliminar");
-				scanf("%i", &encontrado);
+				do {
+					mostrar_horarios(horarios, nHorarios);
+					puts("Introduce el horario que desee eliminar");
+					scanf("%i", &encontrado);
+				}while(encontrado < 0 || encontrado >= nHorarios);
 				eliminar_horario(&horarios, encontrado-1, &nHorarios);
 				break;
 			case 3:
-				mostrar_horarios(horarios, nHorarios);
-				puts("Introduce el horario que desee modificar");
-				scanf("%i", &encontrado);
+				do {
+					mostrar_horarios(horarios, nHorarios);
+					puts("Introduce el horario que desee modificar");
+					scanf("%i", &encontrado);
+				}while(encontrado < 0 || encontrado >= nHorarios);
 				modificar_horario(horarios, materias, usuarios, alumnos, &nHorarios, nMaterias, nUsuarios, nAlumnos, encontrado);
 				break;
 			case 4:
@@ -130,15 +133,18 @@ void modificar_horario(horario *hor, materia *materias, usuario *usuarios, alumn
 	
 	fflush(stdin);
 	puts("Introduce el id de profesor");
-	scanf("%s", &nuevo.id_profesor);
+	fgets(nuevo.id_profesor, 4, stdin);
+	quitar_salto(nuevo.id_profesor);
 	
 	fflush(stdin);
 	puts("Introduce el id de la materia");
-	scanf("%s", &nuevo.id_materia);
+	fgets(nuevo.id_materia, 5, stdin);
+	quitar_salto(nuevo.id_materia);
 	
 	fflush(stdin);
 	puts("Introduce el grupo");
-	scanf("%s", &nuevo.grupo);
+	fgets(nuevo.grupo, 11, stdin);
+	quitar_salto(nuevo.grupo);
 	
 	if(encontrar_profesor(usuarios, nuevo.id_profesor, nUsuarios) == -1 ||
 			encontrar_materia(materias, nuevo.id_materia, nMaterias) == -1 ||
