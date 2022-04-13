@@ -137,44 +137,38 @@ void eliminar_alumno(alumno **alumnos, unsigned *n,char *id) {
 }
 void modificar_alumno(alumno *a){
 	int op;
-	char id[7], nombre[21], direccion[31], localidad[31], curso[31], grupo[11];
+	char nombre[21], direccion[31], localidad[31], curso[31], grupo[11];
 	puts("Introduzca que desea cambiar");
 	printf("-------------------------\n");
-	printf("1)Id\n2)Nombre\n3)Direccion\n4)Localidad\n5)Curso\n6)Grupo\n");
+	printf("1)Nombre\n2)Direccion\n3)Localidad\n4)Curso\n5)Grupo\n");
 	scanf("%i",&op);
 	do{
 		switch(op){
 			case 1:
 				fflush(stdin);
-				puts("Introduzca la nueva id");
-				fgets(id, 7, stdin);
-				strcpy(a->curso,id);
-				break;
-			case 2:
-				fflush(stdin);
 				puts("Introduzca el nuevo nombre");
 				fgets(nombre,21, stdin);
 				strcpy(a->nombre_alum, nombre);
 				break;
-			case 3:
+			case 2:
 				fflush(stdin);
 				puts("Introduce la nueva direccion");
 				fgets(direccion, 31, stdin);
 				strcpy(a->direc_alum, direccion);
 				break;
-			case 4:
+			case 3:
 				fflush(stdin);
 				puts("Introduce la nueva localidad");
 				fgets(localidad, 31, stdin);
 				strcpy(a->local_alum, localidad);
 				break;
-			case 5:
+			case 4:
 				fflush(stdin);
 				puts("Introduce el nuevo curso");
 				fgets(curso, 31, stdin);
 				strcpy(a->curso, curso);
 				break;
-			case 6:
+			case 5:
 				fflush(stdin);
 				puts("Introduce el nuevo grupo");
 				fgets(grupo, 11, stdin);
