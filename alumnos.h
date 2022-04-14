@@ -35,7 +35,7 @@ alumno *leer_alumnos(unsigned *nAlumnos);
 void guardar_alumnos(const alumno *alumnos, unsigned n);
 
 //Cabecera: void menu_admin_alumno (alumno *a, unsigned n)
-//Precondición:Vector de alumno inicializado
+//Precondición:Ninguna
 //Postcondición: Muestra el menu de administrador para alumnos
 void menu_admin_alumno();
 
@@ -79,6 +79,9 @@ int existe_alumno (alumno *a, char *s, unsigned n);
 //Postcondición: Guarda el alumno en el fichero
 void guardar_alumno(const alumno *a, FILE *f);
 
+//Cabecera: int existe_grupo(alumno *a, unsigned n, char *grupo)
+//Precondición: Vector de alumnos a inicializado, n es el número de alumnos
+//Poscondición: Devuelve 0 si no existe el grupo y 1 si existe
 int existe_grupo(alumno *a, unsigned n, char *grupo);
 
 #endif /* ALUMNOS_H */

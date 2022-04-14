@@ -5,7 +5,15 @@
 *	DEFINICIÓN DE FUNCIONES PRIVADAS 	*
 *										*
 **/
+
+//Cabecera: int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n)
+//Precondición: n es el número de horarios, nuevo es el horario recibido que se quiere verificar si está libre
+//Poscondición: Devuelve 1 si el horario está libre (no existe) o 0 si no está libre
 int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n);
+
+//Cabecera: int profesor_libre(const horario *nuevo, const horario *horarios, unsigned n)
+//Precondición: n es el número de horarios, nuevo es el horario recibido que contiene el profesor (id), hora y día que se quiere verificar si está libre
+//Poscondición: Devuelve 1 si el profesor está libre en esa fecha o 0 si no.
 int profesor_libre(const horario *nuevo, const horario *horarios, unsigned n);
 
 void menu_admin_horarios() {
