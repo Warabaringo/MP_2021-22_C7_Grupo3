@@ -49,7 +49,7 @@ void menu_admin_horarios() {
 					mostrar_horarios(horarios, nHorarios);
 					puts("Introduce el horario que desee eliminar");
 					scanf("%i", &encontrado);
-				}while(encontrado < 0 || encontrado >= nHorarios);
+				}while(encontrado < 0 || encontrado > nHorarios);
 				eliminar_horario(&horarios, encontrado-1, &nHorarios);
 				break;
 			case 3:
@@ -57,8 +57,8 @@ void menu_admin_horarios() {
 					mostrar_horarios(horarios, nHorarios);
 					puts("Introduce el horario que desee modificar");
 					scanf("%i", &encontrado);
-				}while(encontrado < 0 || encontrado >= nHorarios);
-				modificar_horario(horarios, materias, usuarios, alumnos, &nHorarios, nMaterias, nUsuarios, nAlumnos, encontrado);
+				}while(encontrado < 0 || encontrado > nHorarios);
+				modificar_horario(horarios, materias, usuarios, alumnos, &nHorarios, nMaterias, nUsuarios, nAlumnos, encontrado-1);
 				break;
 			case 4:
 				mostrar_horarios(horarios, nHorarios);
