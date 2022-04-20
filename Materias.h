@@ -13,32 +13,32 @@ char Abrev_materia [3];
 materia *vMaterias;
 
 //Cabecera: void daraltasig(materia **vMaterias,int *nMaterias);
-//Precondición: vMaterias es la posición de la materia que se desea dar de alta y nMaterias el número de materias que encontramos
-//Postcondición: Da de alta la asignatura elegida
+//Precondici?n: vMaterias es la posici?n de la materia que se desea dar de alta y nMaterias el n?mero de materias que encontramos
+//Postcondici?n: Da de alta la asignatura elegida
 
 void daraltasig(materia **vMaterias,int *nMaterias);
 
 //Cabecera: void darbajaasig(materia **vMaterias, int *nMaterias);
-//Precondición: vMaterias es la posición de la materia que se desea dar de baja y nMaterias el número de materias que encontramos
-//Postcondición: Da de baja a la asignatura elegida
+//Precondici?n: vMaterias es la posici?n de la materia que se desea dar de baja y nMaterias el n?mero de materias que encontramos
+//Postcondici?n: Da de baja a la asignatura elegida
 
 void darbajaasig(materia **vMaterias, int *nMaterias);
 
 //Cabecera: void modificarMateria(materia **vMaterias,int nMaterias);
-//Precondición: vMaterias es la posición de la materia que se desea modificar y nMaterias el número de materias que encontramos
-//Postcondición: Se consigue modificar la materia exitosamente, dándole los valores correspondientes a los de la función "daraltasig"
+//Precondici?n: vMaterias es la posici?n de la materia que se desea modificar y nMaterias el n?mero de materias que encontramos
+//Postcondici?n: Se consigue modificar la materia exitosamente, d?ndole los valores correspondientes a los de la funci?n "daraltasig"
 
 void modificarMateria(materia **vMaterias,int nMaterias);
 
 //Cabecera: void listarMaterias(materia *vMaterias,int nMaterias);
-//Precondición: vMaterias es la posición de la materia que se desea modificar y nMaterias el número de materias que encontramos
-//Postcondición: El vector, recorrerá todas las materias correspondientes mostrándolas por pantalla
+//Precondici?n: vMaterias es la posici?n de la materia que se desea modificar y nMaterias el n?mero de materias que encontramos
+//Postcondici?n: El vector, recorrer? todas las materias correspondientes mostr?ndolas por pantalla
 
 void listarMaterias(materia *vMaterias,int nMaterias);
 
 //Cabecera: materia *leer_materia(unsigned *nMaterias);
-//Precondición: nMaterias es el número de materias que encontramos, cada unsigned son el numero distinto del vector
-//Postcondición: Se encargará de leer todas las materias de nuestro fichero
+//Precondici?n: nMaterias es el n?mero de materias que encontramos, cada unsigned son el numero distinto del vector
+//Postcondici?n: Se encargar? de leer todas las materias de nuestro fichero
 
 materia *leer_materia(unsigned *nMaterias);
 

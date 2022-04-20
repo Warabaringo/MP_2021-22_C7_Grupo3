@@ -18,7 +18,7 @@ void anadirCalif(char *Id_alum,calificacion **vCalificaciones, int *nCalificacio
     printf("\n Introduzca el ID del alumno(3 digitos max.): ");
     scanf("%3s",(*vCalificaciones)[*nCalificaciones].Id_alum);
 
-    printf("\n Introduzca la calificación del alumno(del 0 al 10): ");
+    printf("\n Introduzca la calificaci?n del alumno(del 0 al 10): ");
     scanf("%d",&(*vCalificaciones)[*nCalificaciones].Valor_calif);
 
     (*nCalificaciones)++;
@@ -45,7 +45,7 @@ void eliminarCalif(char *Id_alum, calificacion **vCalificaciones, int *nCalifica
 	
 	printf("\nIntroduzca el ID de la materia: ");
 	scanf("%4s", Id_materia);
-	printf("\nIntroduzca la descripción de la calificación: ");
+	printf("\nIntroduzca la descripci?n de la calificaci?n: ");
 	scanf("%30s", Descrip_calif);
 
     if( nCalifAlumnos == 0){
@@ -60,7 +60,7 @@ void eliminarCalif(char *Id_alum, calificacion **vCalificaciones, int *nCalifica
 
         while(resp!='s' && resp!='n'){
             printf("\nSe eliminara la calificacion %s-%s-%s-%s-%d\n",(*vCalificaciones)[p].Fecha_calif,(*vCalificaciones)[p].Descrip_calif,(*vCalificaciones)[p].Id_materia,(*vCalificaciones)[p].Id_alum,(*vCalificaciones)[p].Valor_calif);
-            printf("¿Esta seguro de eliminar la calificacion? Responda con (s/n)\n");
+            printf("?Esta seguro de eliminar la calificacion? Responda con (s/n)\n");
             fflush(stdin);
             scanf("%c",&resp);
         }
@@ -101,7 +101,7 @@ void modifCalif(char *Id_alum, calificacion **vCalificaciones,int nCalificacione
     while(u==-1){
         printf("\nIntroduzca el ID de la materia: \n");
         scanf("%4s", Id_materia);
-        printf("\nIntroduzca la descripción de la calificación: \n");
+        printf("\nIntroduzca la descripci?n de la calificaci?n: \n");
         scanf("%30s", Descrip_calif);
         printf("\n");
 
@@ -123,7 +123,7 @@ void modifCalif(char *Id_alum, calificacion **vCalificaciones,int nCalificacione
             anadirCalif(Id_alum, &ModCalificacion, &nModCalificacion, &nCalifAlumnos);
 
             while(resp!='s' && resp!='n'){
-                printf("¿Modificar la calificacion? Responda (s/n) \n");
+                printf("?Modificar la calificacion? Responda (s/n) \n");
                 fflush(stdin);
                 scanf("%c",&resp);
             }
@@ -132,7 +132,7 @@ void modifCalif(char *Id_alum, calificacion **vCalificaciones,int nCalificacione
                 (*vCalificaciones)[u]=ModCalificacion[0];
             }
 		else{
-                printf("\nModificación cancelada.\n");
+                printf("\nModificaci?n cancelada.\n");
             }
         }
     }

@@ -99,7 +99,7 @@ void modificarMateria(materia **vMaterias,int nMaterias){
             daraltasig(&modMaterias,&nModMaterias);
 
             while(resp!='s' && resp!='n'){
-                printf("¿Modificar la materia? Responda (s/n) \n");
+                printf("?Modificar la materia? Responda (s/n) \n");
                 fflush(stdin);
                 scanf("%c",&resp);
             }
@@ -108,7 +108,7 @@ void modificarMateria(materia **vMaterias,int nMaterias){
                 (*vMaterias)[u]=modMaterias[0];
             }
 		else{
-                printf("\nModificación cancelada.\n");
+                printf("\nModificaci?n cancelada.\n");
             }
         }
     }

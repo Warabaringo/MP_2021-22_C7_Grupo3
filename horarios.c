@@ -2,20 +2,20 @@
 
 /**
 *										*
-*	DEFINICIÓN DE FUNCIONES PRIVADAS 	*
+*	DEFINICI?N DE FUNCIONES PRIVADAS 	*
 *										*
 **/
-
+//
 //Cabecera: int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n)
-//Precondición: n es el número de horarios, nuevo es el horario recibido que se quiere verificar si está libre
-//Poscondición: Devuelve 1 si el horario está libre (no existe) o 0 si no está libre
+//Precondici?n: n es el n?mero de horarios, nuevo es el horario recibido que se quiere verificar si est? libre
+//Poscondici?n: Devuelve 1 si el horario est? libre (no existe) o 0 si no est? libre
 int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n);
-
+//
 //Cabecera: int profesor_libre(const horario *nuevo, const horario *horarios, unsigned n)
-//Precondición: n es el número de horarios, nuevo es el horario recibido que contiene el profesor (id), hora y día que se quiere verificar si está libre
-//Poscondición: Devuelve 1 si el profesor está libre en esa fecha o 0 si no.
+//Precondici?n: n es el n?mero de horarios, nuevo es el horario recibido que contiene el profesor (id), hora y d?a que se quiere verificar si est? libre
+//Poscondici?n: Devuelve 1 si el profesor est? libre en esa fecha o 0 si no.
 int profesor_libre(const horario *nuevo, const horario *horarios, unsigned n);
-
+//
 void menu_admin_horarios() {
 	unsigned nHorarios, nUsuarios, nAlumnos, nMaterias;
 	int op, encontrado;
@@ -77,7 +77,7 @@ void menu_admin_horarios() {
 	free(usuarios);
 	
 }
-
+//
 void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno *alumnos, 
 		unsigned nUsuarios, unsigned nMaterias, unsigned nAlumnos, unsigned *nHorarios) {
 	horario nuevo;
@@ -124,7 +124,7 @@ void agregar_horario(horario **hor, usuario *usuarios, materia *materias, alumno
 			puts("El profesor no estaba libre ese dia a esa hora");
 	}
 }
-
+//
 void eliminar_horario(horario **hor, int encontrado, unsigned *nHorarios) {
 	int i;
 	
@@ -134,7 +134,7 @@ void eliminar_horario(horario **hor, int encontrado, unsigned *nHorarios) {
 	(*nHorarios)--;
 	*hor = realloc(*hor, *nHorarios * sizeof(hor));
 }
-
+//
 void modificar_horario(horario *hor, materia *materias, usuario *usuarios, alumno *alumnos, 
 		unsigned *nHorarios, unsigned nMaterias, unsigned nUsuarios, unsigned nAlumnos, int encontrado) {
 	horario nuevo;
@@ -178,7 +178,7 @@ void modificar_horario(horario *hor, materia *materias, usuario *usuarios, alumn
 			puts("El profesor no estaba libre ese dia a esa hora");
 	}
 }
-
+//
 void mostrar_horarios(horario *horarios, unsigned nHorarios) {
 	int i;
 	
@@ -189,7 +189,7 @@ void mostrar_horarios(horario *horarios, unsigned nHorarios) {
 		puts("-------------------------");
 	}
 }
-
+//
 void mostrar_horario(const horario *hor) {
 	static char *nombre_dias[5] = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes" };
 	static char *nombre_horas[6] = {"Primera", "Segunda", "Tercera", "Cuarta", "Quinta", "Sexta"};
@@ -201,7 +201,7 @@ void mostrar_horario(const horario *hor) {
 	printf("Id materia: %s\n", hor->id_materia);
 	printf("Grupo: %s\n", hor->grupo);
 }
-
+//
 horario *leer_horarios(unsigned *nHorarios){
     horario *horarios = NULL;
     horario hor;
@@ -232,7 +232,7 @@ horario *leer_horarios(unsigned *nHorarios){
     
     return horarios;
 }
-
+//
 void guardar_horarios(const horario *horarios, unsigned n) {
 	FILE *f = fopen("Horarios.txt","w");
 	unsigned i;
@@ -240,7 +240,7 @@ void guardar_horarios(const horario *horarios, unsigned n) {
 		guardar_horario(&horarios[i], f);
 	fclose(f);
 }
-
+//
 void guardar_horario (const horario *h, FILE *f) {
 	fprintf(f,"%s-", h->id_profesor);
 	fprintf(f,"%i-", h->dia_clase);
@@ -248,7 +248,7 @@ void guardar_horario (const horario *h, FILE *f) {
 	fprintf(f,"%s-", h->id_materia);
 	fprintf(f,"%s", h->grupo);
 }
-
+//
 int encontrar_materia(materia *materias, char *idMateria, unsigned nMaterias) {
 	int i = 0, encontrado = -1;
 	
@@ -260,7 +260,7 @@ int encontrar_materia(materia *materias, char *idMateria, unsigned nMaterias) {
 	
 	return encontrado;
 }
-
+//
 int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n) {
 	int libre = 1, i = 0, dia_clase, hora_clase;
 	char grupo[11];
@@ -281,7 +281,7 @@ int grupo_libre(const horario *nuevo, const horario *horarios, unsigned n) {
 	
 	return libre;
 }
-
+//
 int profesor_libre(const horario *nuevo, const horario *horarios, unsigned n) {
 	int libre = 1, i = 0, dia_clase, hora_clase;
 	char id_profesor[4];

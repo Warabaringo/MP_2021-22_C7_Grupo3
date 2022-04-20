@@ -18,26 +18,26 @@ calificacion *vCalificaciones;
 int nCalifAlumnos;
 
 //Cabecera: void anadirCalif(char *Id_alum,calificacion **vCalificaciones, int *nCalificaciones,int *nCalifAlumno);
-//Precondición: Id_alum será la id del propio alumno que deseamos encontrar, nCalificaciones el número de calificaciones que encontramos, nCalifAlumno será la calificación de dicho alumno y vCalificaciones la posición en la que nos encontramos del vector
-//Postcondición: Anadir la calificación a un alumno correspondiente
+//Precondici?n: Id_alum ser? la id del propio alumno que deseamos encontrar, nCalificaciones el n?mero de calificaciones que encontramos, nCalifAlumno ser? la calificaci?n de dicho alumno y vCalificaciones la posici?n en la que nos encontramos del vector
+//Postcondici?n: Anadir la calificaci?n a un alumno correspondiente
 
 void anadirCalif(char *Id_alum,calificacion **vCalificaciones, int *nCalificaciones,int *nCalifAlumno);
 
 //Cabecera: void listarCalif(char *Id_alum, calificacion*vCalificaciones, int nCalificaciones, int nCalifAlumnos);
-//Precondición: Id_alum será la id del propio alumno que deseamos encontrar, nCalificaciones el número de calificaciones que encontramos, nCalifAlumno será la calificación de dicho alumno y vCalificaciones la posición en la que nos encontramos del vector
-//Postcondición: Listar las calificaciones de un alumno seleccionado
+//Precondici?n: Id_alum ser? la id del propio alumno que deseamos encontrar, nCalificaciones el n?mero de calificaciones que encontramos, nCalifAlumno ser? la calificaci?n de dicho alumno y vCalificaciones la posici?n en la que nos encontramos del vector
+//Postcondici?n: Listar las calificaciones de un alumno seleccionado
 
 void listarCalif(char *Id_alum, calificacion*vCalificaciones, int nCalificaciones, int nCalifAlumnos);
 
 //Cabecera:void eliminarCalif(char *Id_alum, calificacion **vCalificaciones, int *nCalificaciones, int *nCalifAlumnos);
-//Precondición: Id_alum será la id del propio alumno que deseamos encontrar, nCalificaciones el número de calificaciones que encontramos, nCalifAlumno será la calificación de dicho alumno y vCalificaciones la posición en la que nos encontramos del vector
-//Postcondición: Eliminar la calificación de un alumno
+//Precondici?n: Id_alum ser? la id del propio alumno que deseamos encontrar, nCalificaciones el n?mero de calificaciones que encontramos, nCalifAlumno ser? la calificaci?n de dicho alumno y vCalificaciones la posici?n en la que nos encontramos del vector
+//Postcondici?n: Eliminar la calificaci?n de un alumno
 
 void eliminarCalif(char *Id_alum, calificacion **vCalificaciones, int *nCalificaciones, int *nCalifAlumnos);
 
 //Cabecera:void modifCalif(char *Id_alum, calificacion **vCalificaciones,int nCalificaciones, int nCalifAlumnos);
-//Precondición: Id_alum será la id del propio alumno que deseamos encontrar, nCalificaciones el número de calificaciones que encontramos, nCalifAlumno será la calificación de dicho alumno y vCalificaciones la posición en la que nos encontramos del vector
-//Postcondición: Modificar la calificación de un alumno seleccionado
+//Precondici?n: Id_alum ser? la id del propio alumno que deseamos encontrar, nCalificaciones el n?mero de calificaciones que encontramos, nCalifAlumno ser? la calificaci?n de dicho alumno y vCalificaciones la posici?n en la que nos encontramos del vector
+//Postcondici?n: Modificar la calificaci?n de un alumno seleccionado
 
 void modifCalif(char *Id_alum, calificacion **vCalificaciones,int nCalificaciones, int nCalifAlumnos);
 
